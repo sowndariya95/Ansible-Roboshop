@@ -14,8 +14,23 @@
     ansible.builtin.command: id roboshop
     register: out
     ignore_errors: true
-    
+
   - when: out.rc != 0
     name: create user roboshop
     ansible.builtin.user:
       name: roboshop
+
+  - name: check /app directory exist or not
+    ansible.builtin.stat:
+      path: /app
+    register: directory
+
+  - name: print the directory stats
+    ansible.builtin.debug:
+      msg: "output: {{directory}}"
+
+  - when: directory.stat.exists == False
+    name: create new directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
