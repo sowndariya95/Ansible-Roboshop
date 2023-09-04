@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: Install maven
-    ansible.buitin.yum:
+    ansible.builtin.yum:
       name: maven
       state: started
 
@@ -47,3 +47,12 @@
     ansible.builtin.command: mvn clean package
     args:
       chdir: /app
+
+  - name: copy shipping service
+    ansible.builtin.copy:
+      src: shipping.service
+      dest: /etc/systemd/system/shipping.service
+
+  - name: deamon reload
+    ansible.builtin.systemd:
+      daemon_reload: true
