@@ -60,8 +60,8 @@
     ansible.builtin.systemd:
       daemon_reload: true
 
-  - name: restart catalogue
+  - name: restart cart
     ansible.builtin.service:
-      name: catalogue
+      name: cart
       state: restarted
       enabled: true
