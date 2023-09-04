@@ -15,3 +15,15 @@ user.learningdevops.shop
 
 [reddis]
 reddis.learningdevops.shop
+
+[mysql]
+mysql.learningdevops.shop
+
+[shipping]
+shipping.learningdevops.shop
+
+[payment]
+payment.learningdevops.shop
+
+[rabbitmq]
+rabbitmq.learningdevops.shop
