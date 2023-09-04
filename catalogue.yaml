@@ -71,7 +71,7 @@
       state: installed
 
   - name: load catalogue data
-    ansible.builtin.command: mongo --host mongodb.learningdevops.shop </app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.learningdevops.shop < /app/schema/catalogue.js
       remote_src: yes
 
   - name: restart catalogue
