@@ -62,7 +62,7 @@
     ansible.builtin.systemd:
       daemon_reload: true
 
- - name: Install MySQL client
+  - name: Install MySQL client
     ansible.builtin.yum:
       name: mysql
       state: installed
