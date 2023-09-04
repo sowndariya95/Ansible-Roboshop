@@ -9,3 +9,9 @@ catalogue.learningdevops.shop
 
 [cart]
 cart.learningdevops.shop
+
+[user]
+user.learningdevops.shop
+
+[reddis]
+reddis.learningdevops.shop
