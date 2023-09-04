@@ -1,0 +1,49 @@
+- name: Install shipping component
+  hosts: shipping
+  become: yes
+  tasks:
+  - name: Install maven
+    ansible.buitin.yum:
+      name: maven
+      state: started
+
+  - name: check roboshop user exist or not
+    ansible.builtin.command: id roboshop
+    register: out
+    ignore_errors: true
+
+  - when: out.rc != 0
+    name: create user roboshop
+    ansible.builtin.user:
+      name: roboshop
+
+  - name: check directory exists or not
+    ansible.builtin.stat:
+      path: /app
+      register: directory
+
+  - name: print the directoty stat
+    ansible.builtin.debug:
+      msg: "output : {{directory}}"
+
+  - when: directory.stat.exists == False
+    name: create new directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+  - name: download the url
+    ansible.builtin.get_url: 
+      url: https://roboshop-builds.s3.amazonaws.com/shipping.zip
+      dest: /tmp
+
+  - name: extract the downloaded file
+    ansible.builtin.unarchive:
+      src: /tmp/shipping.zip
+      dest: /app
+      remote_src: yes
+
+  - name: install dependency
+    ansible.builtin.command: mvn clean package
+    args:
+      chdir: /app
